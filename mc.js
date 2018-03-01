@@ -1,7 +1,7 @@
 const Database = require('better-sqlite3')
 const zlib = require('zlib')
 const params = {
-  src: '/export/github/openmaptiles/results/africa.mbtiles',
+  src: '/export/amphitrite.mbtiles',
   gzipped: true
 }
 const v2q = v => {
@@ -10,7 +10,7 @@ const v2q = v => {
   }
 }
 const ZBOUND = 19
-const QBOUND = 23
+const QBOUND = 25
 let r = new Array(QBOUND)
 for(let q = 0; q < QBOUND; q++) {
   r[q] = new Array(ZBOUND).fill(0)
