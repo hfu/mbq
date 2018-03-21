@@ -1,7 +1,8 @@
 const Database = require('better-sqlite3')
 const zlib = require('zlib')
+const fs = require('fs')
 const params = {
-  src: '/export/amphitrite.mbtiles',
+  src: '/home/dltiles/7-75-63-uganda.mbtiles',
   gzipped: true
 }
 const v2q = v => {
@@ -27,7 +28,10 @@ const show = () => {
   }
 }
 
-const db = new Database(params.src)
+let path = params.src
+if (process.argv.length == 3) path = process.argv[2]
+if (!fs.existsSync(path)) throw `${path} not found.`
+const db = new Database(path)
 let count = 0
 const size = db.prepare('SELECT count(*) FROM tiles').get()['count(*)']
 for (const row of db.prepare('SELECT * FROM tiles').iterate()) {
@@ -38,9 +42,9 @@ for (const row of db.prepare('SELECT * FROM tiles').iterate()) {
   r[q + 1][z] += 1
   count ++
   if(count % 5000 === 0) {
-    console.log(`${params.src}: ${count}(${Math.floor(100.0 * count / size)}%)`)
+    console.log(`${path}: ${count}(${Math.floor(100.0 * count / size)}%)`)
     show()
   }
 }
-console.log(`final result for ${params.src} (${count} tiles)`)
+console.log(`final result for ${path} (${count} tiles)`)
 show()
