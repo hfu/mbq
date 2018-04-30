@@ -3,7 +3,7 @@ const zlib = require('zlib')
 const fs = require('fs')
 const params = {
   src: '/home/dltiles/7-75-63-uganda.mbtiles',
-  gzipped: true
+  gzipped: false
 }
 const v2q = v => {
   for(let i = 0; true; i++) {
