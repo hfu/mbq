@@ -2,8 +2,7 @@ const Database = require('better-sqlite3')
 const zlib = require('zlib')
 const fs = require('fs')
 const params = {
-  src: '/home/dltiles/7-75-63-uganda.mbtiles',
-  gzipped: false
+  gunzip: false
 }
 const v2q = v => {
   for(let i = 0; true; i++) {
@@ -28,22 +27,28 @@ const show = () => {
   }
 }
 
-let path = params.src
-if (process.argv.length == 3) path = process.argv[2]
-if (!fs.existsSync(path)) throw `${path} not found.`
-const db = new Database(path)
-let count = 0
-const size = db.prepare('SELECT count(*) FROM tiles').get()['count(*)']
-for (const row of db.prepare('SELECT * FROM tiles').iterate()) {
-  const z = row.zoom_level
-  let data = row.tile_data
-  if(params.gzipped) data = zlib.gunzipSync(data)
-  const q = v2q(data.length)
-  r[q + 1][z] += 1
-  count ++
-  if(count % 5000 === 0) {
-    console.log(`${path}: ${count}(${Math.floor(100.0 * count / size)}%)`)
-    show()
+if (process.argv.length == 2) {
+  console.log('usage: node mc.js {mbtiles}')
+  process.exit()
+}
+for (let i = 2; i < process.argv.length; i++) {
+  let path = process.argv[i]
+  if (!fs.existsSync(path)) throw `${path} not found.`
+  const db = new Database(path)
+  let count = 0
+  // const size = db.prepare('SELECT count(*) FROM tiles').get()['count(*)']
+  for (const row of db.prepare('SELECT * FROM tiles').iterate()) {
+    const z = row.zoom_level
+    let data = row.tile_data
+    if (params.gunzip) data = zlib.gunzipSync(data)
+    const q = v2q(data.length)
+    r[q + 1][z] += 1
+    count ++
+    if(count % 5000 === 0) {
+      // console.log(`${path}: ${count}(${Math.floor(100.0 * count / size)}%)`)
+      console.log(`${path}: ${count}`)
+      show()
+    }
   }
 }
 console.log(`final result for ${path} (${count} tiles)`)
