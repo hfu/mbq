@@ -44,12 +44,12 @@ for (let i = 2; i < process.argv.length; i++) {
     const q = v2q(data.length)
     r[q + 1][z] += 1
     count ++
-    if(count % 5000 === 0) {
+    if(count % 50000 === 0) {
       // console.log(`${path}: ${count}(${Math.floor(100.0 * count / size)}%)`)
       console.log(`${path}: ${count}`)
       show()
     }
   }
 }
-console.log(`final result for ${path} (${count} tiles)`)
+console.log(`final result for ${count} tiles`)
 show()
