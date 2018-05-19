@@ -31,11 +31,11 @@ if (process.argv.length == 2) {
   console.log('usage: node mc.js {mbtiles}')
   process.exit()
 }
+let count = 0
 for (let i = 2; i < process.argv.length; i++) {
   let path = process.argv[i]
   if (!fs.existsSync(path)) throw `${path} not found.`
   const db = new Database(path)
-  let count = 0
   // const size = db.prepare('SELECT count(*) FROM tiles').get()['count(*)']
   for (const row of db.prepare('SELECT * FROM tiles').iterate()) {
     const z = row.zoom_level
