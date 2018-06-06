@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const Database = require('better-sqlite3')
 const zlib = require('zlib')
 const fs = require('fs')
