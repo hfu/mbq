@@ -1,9 +1,9 @@
-# mc
-mc: mbtiles check
+# mbq
+mbq: mbtiles qmatrix check
 ## synopsis
 read a mbtiles files and create a qmatrix of it.
 ## usage
 ```sh
-$ node mc.js # this creates the qmatrix of params.mbtiles in mc.js
-$ node mc.js /somewhare/some.mbtiles # this creates the qmatrix of given path
+$ node mbq.js # this creates the qmatrix of params.mbtiles in mbq.js
+$ node mbq.js /somewhare/some.mbtiles # this creates the qmatrix of given path
 ```

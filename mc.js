@@ -30,7 +30,7 @@ const show = () => {
 }
 
 if (process.argv.length == 2) {
-  console.log('usage: node mc.js {mbtiles}')
+  console.log('usage: node mbq.js {mbtiles}')
   process.exit()
 }
 let count = 0
