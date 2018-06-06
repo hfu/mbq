@@ -2,22 +2,23 @@
   "name": "mbq",
   "version": "1.0.0",
   "description": "mbq: mbtiles qmatrix check",
+  "preferGlobal": true,
   "bin": {
-    "mbq": "mc.js"
+    "mbq": "mbq.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hfu/mc.git"
+    "url": "git+https://github.com/hfu/mbq.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hfu/mc/issues"
+    "url": "https://github.com/hfu/mbq/issues"
   },
-  "homepage": "https://github.com/hfu/mc#readme",
+  "homepage": "https://github.com/hfu/mbq#readme",
   "dependencies": {
     "better-sqlite3": "^4.1.0",
     "zlib": "^1.0.5"
